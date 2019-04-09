@@ -63,15 +63,19 @@ void ListaEnlazada::ordenarPorMergeSortRecursivo(ListaEnlazada *lista) {
 
 void ListaEnlazada::repartir(ListaEnlazada* listaCompleta, ListaEnlazada* sublista1, ListaEnlazada* sublista2) {
 	assert(listaCompleta != NULL && sublista1 != NULL && sublista2 != NULL);
+	assert(listaCompleta->getN() >= 2);
 	assert(sublista1->getN() == 0 && sublista2->getN() == 0);
 	unsigned end = listaCompleta->getN();//Guarda longitud
 	unsigned half = end / 2;//Calcula mitad
 
-	for (unsigned i = 0; i < half; ++i)
-		sublista1->insertar(i, listaCompleta->getValor(i));//Rellena sublista1 con la primera mitad
-
-	for (unsigned i = half, j = 0; i < end; ++i, ++j)
-		sublista2->insertar(j, listaCompleta->getValor(i));//Rellena sublista2 con la segunda mitad
+	for (unsigned i = 0; i < half; ++i) {
+		sublista1->insertar(i, listaCompleta->getValor(0));//Rellena sublista1 con la primera mitad
+		listaCompleta->eliminar(0);
+	}
+	for (unsigned i = half, j = 0; i < end; ++i, ++j) {
+		sublista2->insertar(j, listaCompleta->getValor(0));//Rellena sublista2 con la segunda mitad
+		listaCompleta->eliminar(0);
+	}
 }
 
 ListaEnlazada::ListaEnlazada() {
