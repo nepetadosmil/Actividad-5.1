@@ -49,7 +49,7 @@ void ListaEnlazada::ordenarPorMergeSortRecursivo(ListaEnlazada *lista) {
 
 	ListaEnlazada *lista1 = new ListaEnlazada;
 	ListaEnlazada *lista2 = new ListaEnlazada;
-	repartir(this, lista1, lista2);
+	repartir(lista, lista1, lista2);
 	
 	ordenarPorMergeSortRecursivo(lista1);
 	ordenarPorMergeSortRecursivo(lista2);
@@ -86,7 +86,7 @@ void ListaEnlazada::combinar(ListaEnlazada* origen1, ListaEnlazada* origen2, Lis
 	assert(isOrdenada(origen1) && isOrdenada(origen2));
 
 	while (origen1->getN() > 0 && origen2->getN() > 0) {
-		if (origen1->getValor(0) > origen2->getValor(0)) {//Si el valor en origen1 > valor en origen2
+		if (origen1->getValor(0) < origen2->getValor(0)) {//Si el valor en origen1 < valor en origen2
 			destino->insertar(destino->getN(), origen1->getValor(0));
 			origen1->eliminar(0);
 		}
@@ -105,6 +105,23 @@ void ListaEnlazada::combinar(ListaEnlazada* origen1, ListaEnlazada* origen2, Lis
 		destino->insertar(destino->getN(), origen2->getValor(0));
 		origen2->eliminar(0);
 	}
+}
+
+
+bool ListaEnlazada::isOrdenada(ListaEnlazada* lista) {
+	assert(lista != NULL);
+	
+	if (lista->getN() <= 1)
+		return true;
+
+	int anterior = lista->getValor(0);
+	for (unsigned i = 1; i < lista->getN(); ++i) {
+		if (anterior > lista->getValor(i))//Si no está ordenada
+			return false;
+		anterior = lista->getValor(i);
+	}
+
+	return true;
 }
 
 
@@ -206,7 +223,7 @@ void ListaEnlazada::eliminar (int posicion) {
 	} // Fin else
 
 	// Liberamos la memoria del nodo
-	delete(nodoAEliminar);
+	delete nodoAEliminar;
 
 	// Actualizamos n
 	n--;
