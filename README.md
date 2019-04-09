@@ -1,1 +1,2 @@
 # Actividad 5.1
+Please note that this is a pretty inefficient way of ordering a doubly linked list. It was just an activity for class in which we were told how it had to work, and this is the solution.
