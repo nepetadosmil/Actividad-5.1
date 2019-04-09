@@ -78,6 +78,36 @@ void ListaEnlazada::repartir(ListaEnlazada* listaCompleta, ListaEnlazada* sublis
 	}
 }
 
+
+void ListaEnlazada::combinar(ListaEnlazada* origen1, ListaEnlazada* origen2, ListaEnlazada* destino) {
+	assert(origen1 != NULL && origen2 != NULL && destino != NULL);
+	assert(origen1->getN() >= 1 && origen2->getN() >= 1);
+	assert(destino->getN() == 0);
+	assert(isOrdenada(origen1) && isOrdenada(origen2));
+
+	while (origen1->getN() > 0 && origen2->getN() > 0) {
+		if (origen1->getValor(0) > origen2->getValor(0)) {//Si el valor en origen1 > valor en origen2
+			destino->insertar(destino->getN(), origen1->getValor(0));
+			origen1->eliminar(0);
+		}
+		else {
+			destino->insertar(destino->getN(), origen2->getValor(0));
+			origen2->eliminar(0);
+		}
+	}
+
+	while (origen1->getN() > 0) {
+		destino->insertar(destino->getN(), origen1->getValor(0));
+		origen1->eliminar(0);
+	}
+
+	while (origen2->getN() > 0) {
+		destino->insertar(destino->getN(), origen2->getValor(0));
+		origen2->eliminar(0);
+	}
+}
+
+
 ListaEnlazada::ListaEnlazada() {
 	lista = NULL; 
 	n=0;
