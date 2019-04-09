@@ -123,6 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="impresionListasEnlazadas.h" />
+    <ClInclude Include="ListaEnlazada.h" />
+    <ClInclude Include="Nodo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="impresionListasEnlazadas.cpp" />
+    <ClCompile Include="ListaEnlazada.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
